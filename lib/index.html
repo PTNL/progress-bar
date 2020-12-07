@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <script>
+            location.search
+                .split(/[?&]/)
+                .filter((item) => item.startsWith('css='))
+                .forEach((source) => {
+                    const href = decodeURIComponent(source.slice(4));
+
+                    document.write(`<link rel="stylesheet" href="${href}" />`);
+                });
+        </script>
+
+        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="scale.css" />
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script src="index.js"></script>
+    </body>
+</html>

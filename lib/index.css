@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+table {
+    width: 100%;
+}
+
+td:nth-child(2) {
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.bar {
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    animation: 0.3s linear 0s alternate show;
+}
+
+.fact {
+    position: absolute;
+    left: 0;
+    top: 30%;
+    height: 40%;
+}
+
+.plan {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.tippy-box {
+    padding: 3px 5px;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.tippy-content {
+    font-size: 13px;
+    color: #fff;
+}
+
+
+@keyframes show {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
