@@ -37,6 +37,11 @@ export class Progressbar extends Widget implements OnChange {
     onChange(): void {
         const topValue = this.getTopValue();
 
+        if (!topValue) {
+            this.ready();
+            return;
+        }
+
         const rows = this.rows
             .map((row, index) => {
                 return this.renderItem(
@@ -80,6 +85,7 @@ export class Progressbar extends Widget implements OnChange {
         const planWidth = planValue / topPR;
 
         const bg = COLORS[index % COLORS.length];
+
         return `
             <tr>
                 <td>${label}</td>
@@ -89,8 +95,8 @@ export class Progressbar extends Widget implements OnChange {
                         <div class="fact" style="width: ${factWidth}%; background: ${bg};"></div>
                         
                         <script class="tooltip-content" type="text/html">
-                            <div>${planLabel} - <b>${planValue}</b></div>
-                            <div>${factLabel} - <b>${factValue}</b></div>
+                            ${this.getTooltip(planValue, planLabel)}
+                            ${this.getTooltip(factValue, factLabel)}
                         </script>
     
                     </div>
@@ -99,18 +105,25 @@ export class Progressbar extends Widget implements OnChange {
         `;
     }
 
+    private getTooltip(value, label) {
+        if (value && label) {
+            return `<div>${label} - <b>${value}</b></div>`;
+        }
+        return '';
+    }
+
     private getName(key) {
         if (this.columns[key] && this.columns[key].length) {
             return this.columns[key][0].name;
         }
-        return null;
+        return '';
     }
 
     private getValue(row, key) {
         if (this.columns[key] && this.columns[key].length) {
             return row[this.columns[key][0].path];
         }
-        return null;
+        return '';
     }
 
     private getTopValue(): number {
@@ -119,8 +132,8 @@ export class Progressbar extends Widget implements OnChange {
         this.rows.forEach((row) => {
             topValue = Math.max(
                 topValue,
-                row[this.columns[EBlockKey.Plan][0].path],
-                row[this.columns[EBlockKey.Fact][0].path],
+                this.getValue(row, EBlockKey.Plan),
+                this.getValue(row, EBlockKey.Fact),
             );
         });
 
