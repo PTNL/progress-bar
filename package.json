@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ptnl-constructor-sdk": "^0.7.37"
+    "ptnl-constructor-sdk": "^0.7.41"
   },
   "dependencies": {
     "tippy.js": "^6.2.7"
